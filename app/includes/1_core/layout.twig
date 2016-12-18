@@ -1,0 +1,17 @@
+{# layout.twig #}
+
+{% include 'head.twig' %}
+
+{% if bodyClass is defined %}
+<body class="{{ bodyClass }}">
+{% else %}
+<body>
+{% endif %}
+
+  {% block page %}{% endblock %}
+
+  {% include '../4_regions/footer.twig' %}
+
+</body>
+
+</html>

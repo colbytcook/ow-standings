@@ -1,0 +1,107 @@
+///*------------------------------------*\
+//    #CORE/HTML - TABLES
+//\*------------------------------------*/
+
+table {
+  box-shadow:0px 6px 7px rgba(0, 0, 0, 0.28);
+  border-collapse: collapse;
+  border-radius:10px;
+  position:relative;
+  width: 100%;
+  &:after{
+    background:$white;
+    content:'';
+    display:block;
+    height:100%;
+    left:0;
+    position:absolute;
+    opacity:0.7;
+    top:0;
+    width:100%;
+    z-index:0;
+  }
+}
+tbody{
+  tr:nth-of-type(odd) {
+    background: #51474d;
+  }
+}
+td,
+th {
+  padding: 10px;
+  position:relative;
+  text-align: left;
+  width:25%;
+  z-index:1;
+}
+.profiles{
+  padding-right:5px;
+}
+th.profile-tab{
+  // background: #51474d;
+  // border:1px solid #51474d;
+  color: white;
+  font-weight: bold;
+  padding:10px 5px 0 5px;
+  text-align:center;
+}
+td{
+  @include font-size(12,18);
+  // padding:10px 10px 0 10px;
+  span{
+    @include font-size(18,24);
+    display:block;
+    padding:10px 0;
+  }
+  // border: 1px solid #b1afb2;
+}
+.logo{
+  margin: 0 auto;
+  width: 69%;
+}
+.tab{
+  background: #51474d;
+  border-top-right-radius:10px;
+  border-top-left-radius:10px;
+  height:100%;
+  margin:0 auto;
+  padding:10px;
+  width:100%;
+}
+.avatar{
+  box-shadow: 0px 0px 13px #fff;
+  display:inline-block;
+  vertical-align: top;
+  width:40%;
+}
+.username{
+  @include font-size(24, 10);
+  font-family:$heading;
+  text-transform: uppercase;
+}
+.level-container{
+  display:inline-block;
+  overflow:hidden;
+  position:relative;
+  .star,
+  p{
+    display:inline-block;
+    float:left;
+    vertical-align: top;
+  }
+  .star{
+    left:-36px;
+    position:absolute;
+    top:-27px;
+    width:90px;
+  }
+  p{
+    margin:0;
+    &.star-adjust{
+      padding-left:24px;
+    }
+  }
+}
+.playtime{
+  margin:0.5rem;
+}

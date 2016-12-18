@@ -1,0 +1,16 @@
+'use strict';
+var $ = require('jquery');
+
+module.exports = {
+  init: function() {
+    $('[data-module]').each((i, v) => {
+      var name = $(v).data('module');
+      var module = this.modules[name]($(v));
+    });
+  },
+  modules: {
+    componentReveal: require('./componentReveal/componentReveal.load'),
+    overwatchAjax: require('./overwatchAjax/overwatchAjax.load')
+  }
+
+};
