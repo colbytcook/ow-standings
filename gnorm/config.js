@@ -3,7 +3,7 @@ var src = './app';
 
 module.exports = {
 	app: './app',
-	build: './build/overwatch',
+	build: './build',
 	browserSync: {
 		server: {
 			// We're serving the src folder as well for sass sourcemap linking
@@ -11,14 +11,14 @@ module.exports = {
 		},
 		notify: false, //hide the annoying notification
 		files: [
-			dest + '/overwatch/**',
+			dest + '/**',
 			// Exclude Map files
-			'!' + dest + '/overwatch/**.map'
+			'!' + dest + '/**.map'
 		]
 	},
 	styles: {
 		src: src + '/styles/**/*.{sass,scss}',
-		dest: dest + '/overwatch/styles'
+		dest: dest + '/styles'
 	},
 	favicon: {
 		src: src + '/favicon.ico',
@@ -26,11 +26,11 @@ module.exports = {
 	},
 	fonts: {
 		src: src + '/fonts/**',
-		dest: dest + '/overwatch/fonts'
+		dest: dest + '/fonts'
 	},
 	images: {
 		src: src + '/images/**',
-		dest: dest + '/overwatch/images'
+		dest: dest + '/images'
 	},
 	markup: {
 		src: src + '/**/*.html',
@@ -40,9 +40,9 @@ module.exports = {
 		all: src + '/scripts/**/*.js',
 		modules: src + '/scripts/modules',
 		src: src + '/scripts/app.js',
-		dest: dest + '/overwatch/scripts',
+		dest: dest + '/scripts',
 		libsSrc: src + '/scripts/libs/**/*.js',
-		libsDest: dest + '/overwatch/scripts/libs/',
+		libsDest: dest + '/scripts/libs/',
 		uglifyOptions: {
 			mangle: true,
 			compress: {

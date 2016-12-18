@@ -31,10 +31,22 @@ module.exports = class OverwatchAjax{
     ).then(function() {
       var newHeroesOrder = [];
       var arrayReorder = function(profiles, heroes){
+        var findGamesPlayed = function(){
+
+        };
         for(var pa = 0; pa < profiles.length; pa++){
+          var damageDone = '';
+          var damageDoneAverage = '';
           var playtime = profiles[pa].data.playtime.quick.split(' ');
           for(var h = 0; h < heroes.length; h++){
             var timePlayed = heroes[h].TimePlayed.split('hours');
+            damageDone = parseInt(heroes[h].DamageDone.replace(/,/g, ''), 10);
+            damageDoneAverage = parseInt(heroes[h]["DamageDone-Average"].replace(/,/g, ''), 10);
+            var gamesPlayed = damageDone / damageDoneAverage;
+            if(heroes[h].GamesPlayed === undefined){
+              heroes[h].GamesPlayed = Math.floor(gamesPlayed);
+            }
+            findGamesPlayed();
             if(timePlayed[0] === playtime[0]){
               newHeroesOrder.push(heroes[h]);
             }
@@ -57,24 +69,46 @@ module.exports = class OverwatchAjax{
         profileRow = profileRow + '<th class="profile-tab"><div class="tab"><img class="avatar" src="' + profileData.avatar + '" alt="' + profileData.username + ' avatar" /><p class="username">' + profileData.username + '</p><div class="level-container"><p class="level ' + starClass + '">' + starImage + profileData.level + '</p></div><p class="playtime">Play Time: ' + profileData.playtime.quick + '</p></div></div></th>';
       }
       $('.profiles').html(profileRow);
+      // console.log(newHeroesOrder);
       var keyOrder = [];
       for (var key in newHeroesOrder[0]) {
         keyOrder.push(key);
       }
       for(var ko = 0; ko < keyOrder.length; ko++){
+        var gamesPlayed = 0;
         var infoRow = '';
         var keyValue = keyOrder[ko];
-        infoRow = '<tr><td>' + keyValue.replace( /([A-Z])/g, " $1" ) + '</td>';
-        for(var nho = 0; nho < newHeroesOrder.length; nho++){
-          if(newHeroesOrder[nho][keyValue] === undefined || newHeroesOrder[nho][keyValue] === ''){
-            newHeroesOrder[nho][keyValue] = 0;
+        if(!keyValue.match(/Average/g)){
+          infoRow = '<tr><td>' + keyValue.replace( /([A-Z])/g, " $1" ) + '</td>';
+          for(var nho = 0; nho < newHeroesOrder.length; nho++){
+            var infoOutput = '';
+            if(newHeroesOrder[nho][keyValue] === undefined || newHeroesOrder[nho][keyValue] === ''){
+              newHeroesOrder[nho][keyValue] = 0;
+            }
+            if(!keyValue.match(/MostinGame/g)){
+              // console.log(typeof newHeroesOrder[nho][keyValue]);
+              var average = 0;
+              if(typeof newHeroesOrder[nho][keyValue] === 'string'){
+                average = parseInt(newHeroesOrder[nho][keyValue].replace(/,/g, ''), 10) / newHeroesOrder[nho].GamesPlayed;
+              } else {
+                average = newHeroesOrder[nho][keyValue] / newHeroesOrder[nho].GamesPlayed;
+              }
+              // console.log(average);
+              infoOutput = '<div class="top-row"><p class="data-value">' + newHeroesOrder[nho][keyValue] + '</p><p class="data-average">' + average.toFixed(3) + '</p></div>';
+            } else {
+              infoOutput = newHeroesOrder[nho][keyValue];
+            }
+            infoRow = infoRow + '<td>' + infoOutput + '</td>';
           }
-          infoRow = infoRow + '<td>' + newHeroesOrder[nho][keyValue] + '</td>';
+          infoRow = infoRow + '</tr>';
+          $('.hero-data').append(infoRow);
         }
-        infoRow = infoRow + '</tr>';
-        // console.log(infoRow);
-        $('.hero-data').append(infoRow);
       }
     });
   }
 };
+
+
+//DamageDone / DamageDone-Average = GamesPlayed
+
+//Eliminations/GamesPlayed, Healing/GamesPlayed, all the averages Blizzard doesn't give as a -Average value.
