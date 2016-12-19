@@ -7,6 +7,7 @@ table {
   border-collapse: collapse;
   border-radius:10px;
   position:relative;
+  table-layout: fixed;
   width: 100%;
   &:after{
     background:$white;
@@ -31,7 +32,7 @@ th {
   padding: 10px;
   position:relative;
   text-align: left;
-  width:25%;
+  // width:20%;
   z-index:1;
 }
 .profiles{
@@ -47,11 +48,52 @@ th.profile-tab{
 }
 td{
   @include font-size(12,18);
-  // padding:10px 10px 0 10px;
+  background-image: url('/images/default.png');
+  padding: 18px 20px;
   span{
     @include font-size(18,24);
     display:block;
     padding:10px 0;
+  }
+  &:first-child{
+    background-image: none;
+  }
+  &.medal{
+    background-position: center 76px;
+    background-size: 124px;
+    padding-bottom: 160px;
+    position:relative;
+    &.gold{
+      background-color:rgba(255, 227, 79, 0.38);
+      background-image: url('/images/medal-gold.png');
+      &:after{
+        border:1px solid #fcefa8;
+      }
+    }
+    &.silver{
+      background-color:rgba(132, 255, 243, 0.26);
+      background-image: url('/images/medal-silver.png');
+      &:after{
+        border:1px solid #81fae4;
+      }
+    }
+    &.bronze{
+      background-color:rgba(135, 114, 0, 0.39);
+      background-image: url('/images/medal-bronze.png');
+      &:after{
+        border:1px solid #eac31e;
+      }
+    }
+    &:after{
+      border-radius:10px;
+      display:block;
+      content:'';
+      height:90%;
+      left:5%;
+      position:absolute;
+      top:5%;
+      width:90%;
+    }
   }
   // border: 1px solid #b1afb2;
 }
@@ -104,4 +146,45 @@ td{
 }
 .playtime{
   margin:0.5rem;
+}
+.top-row{
+  overflow:hidden;
+  padding:12px;
+  position:relative;
+  &:after{
+    background-color:$white;
+    border-radius:6px;
+    content:'';
+    height:100%;
+    left:0;
+    opacity:0.6;
+    position:absolute;
+    top:0;
+    width:100%;
+  }
+  p{
+    position:relative;
+    z-index:2;
+  }
+  p{
+    display:block;
+    margin:0;
+    &.data-value{
+      float:left;
+    }
+    &.data-average{
+      float:right;
+      font-family:$heading;
+      font-size:18px;
+      &.center{
+        float:none;
+        text-align:center;
+      }
+    }
+  }
+}
+tbody{
+  p.bold{
+    text-align:center;
+  }
 }
