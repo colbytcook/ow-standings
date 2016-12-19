@@ -11,15 +11,6 @@ module.exports = class OverwatchAjax{
     var ewok = 'EwoK-11957';
     var colby = 'muddypants-1515';
     var joe = 'Zeke-1376';
-    // $.getData = function(user){
-    //   // console.log(users);
-    //   $.get('https://api.lootbox.eu/pc/us/' + user + '/profile', function(profile) {
-    //     profiles.push(profile);
-    //   }),
-    //   $.get('https://api.lootbox.eu/pc/us/' + user + '/quickplay/allHeroes/', function(profileero) {
-    //     heroes.push(profileero);
-    //   })
-    // };
     $.when(
       $.get('https://api.lootbox.eu/pc/us/' + timo + '/profile', function(timoData) {
         profiles.push(timoData);
@@ -149,7 +140,6 @@ module.exports = class OverwatchAjax{
         $(this).find('td').each(function(i){
           var dataValue = $(this).find('.data-average').html();
           if(dataValue !== undefined){
-            console.log(dataValue.replace(',', ''));
             averages.push(dataValue.replace(',', '').replace(':', ''));
           }
         });
